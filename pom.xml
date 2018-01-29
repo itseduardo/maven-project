@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mulesoft.training</groupId>
-	<artifactId>adv_pro_exer01_maven</artifactId>
+	<artifactId>maven-project-em</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule</packaging>
 	<name>Mule adv_pro_exer01_maven Application</name>
@@ -15,10 +15,38 @@
     	<mule.tools.version>1.2</mule.tools.version>
     	<derby.version>10.14.1.0</derby.version>
     	<activeMQ.version>5.15.2</activeMQ.version>
-	</properties>
+    	<uid>tseduardo</uid>	
+    	<pwd></pwd>
+    	
+    	</properties>
 
 	<build>
 		<plugins>
+		
+		   <plugin>
+    <groupId>org.mule.tools.maven</groupId>
+    <artifactId>mule-maven-plugin</artifactId>
+    <version>2.0</version>
+    <configuration>
+        <deploymentType>cloudhub</deploymentType>
+        <muleVersion>${mule.version}</muleVersion>
+        <username>${uid}</username>
+        <password>${pwd}</password>
+	      <workerType>Micro</workerType>
+        <redeploy>true</redeploy>
+        <environment>Sandbox</environment>
+    </configuration>
+    <executions>
+        <execution>
+            <id>deploy</id>
+            <phase>deploy</phase>
+            <goals>
+                <goal>deploy</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+		
 			<plugin>
 				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-app-maven-plugin</artifactId>
@@ -169,7 +197,6 @@
     	<groupId>org.apache.derby</groupId>
    		<artifactId>derby</artifactId>
   		<version>${derby.version}</version>
-  		<scope>provided</scope>
 	</dependency>	
 	<!--  for testing  -->
     <dependency>
@@ -216,6 +243,10 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
+        
+
+
+        
     </pluginRepositories>
 
 </project>
